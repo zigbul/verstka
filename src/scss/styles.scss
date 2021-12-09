@@ -5,3 +5,61 @@
     list-style-type: none;
     outline: none;
 }
+
+.main {
+    display: flex;
+
+    .sidebar {
+        position: relative;
+        width: 280px;
+        height: 100vh;
+    }
+
+    .container {
+    }
+}
+
+.navbar {
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    width: inherit;
+    height: inherit;
+    padding: 24px 16px;
+    background: #111827;
+
+    &__list {
+        flex: 1;
+    }
+
+    &__item {
+        width: 100%;
+        padding: 13px 14px;
+        color: #D1D5DB;
+        border-radius: 8px;
+
+        &_active {
+            color: #10B981;
+            background-color: #FFFFFF14;
+        }
+    }
+
+    &__title {
+        color: #F3F4F6;
+    }
+
+    &__subtitle {
+        color: #9CA3AF;
+    }
+
+    &__button {
+        padding: 8px;
+        margin-top: 16px;
+        width: 100%;
+        border: none;
+        border-radius: 8px;
+        background-color: #10B981;
+        font-weight: 600;
+        color: #FFFFFF;
+    }
+}

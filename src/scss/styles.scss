@@ -5,20 +5,32 @@
     list-style-type: none;
     outline: none;
     border: none;
+    user-select: none;
 }
 
 .main {
     display: flex;
+    font-family: 'Inter', sans-serif;
 
     .sidebar {
         position: relative;
         width: 280px;
         height: 100vh;
+        transition: all .3s linear;
+
+        @media (max-width: 1279px) {
+            width: 76px;
+        }
     }
 
     .container {
         width: calc(100% - 280px);
-        background: #F2F2F2
+        background: #F2F2F2;
+        transition: all .3s linear;
+
+        @media (max-width: 1279px) {
+            width: calc(100% - 76px);
+        }
     }
 
     &__header {
@@ -31,6 +43,26 @@
 
         .user-menu {
             margin-left: auto;
+
+            img {
+                cursor: pointer;
+            }
+        }
+    }
+
+    &__footer {
+        padding: 8px 0 24px;
+        margin: 0 48px;
+        border-top: 1px solid #E6E8F0;
+        color: #111827;
+
+        p {
+            margin-top: 8px;
+            color: #6B7280;
+
+            span {
+                text-decoration: underline;
+            }
         }
     }
 }
@@ -44,41 +76,73 @@
     padding: 24px 16px;
     background: #111827;
 
+    @media (max-width: 1279px) {
+        padding: 10px;
+    }
+
     &__list {
         flex: 1;
     }
 
     &__item {
         width: 100%;
-        padding: 13px 14px;
+        padding: 13px 14px 13px 40px;
         color: #D1D5DB;
         border-radius: 8px;
         cursor: pointer;
+        transition: all .3s linear;
+
+        @each $icon, $num in (dashboard, 1),(customers, 2),(products, 3),(account, 4),
+                            (settings, 5),(login, 6),(register, 7),(error, 8) {
+            &:nth-child(#{$num}) {
+                background-image: url('../../src/icons/#{$icon}.svg');
+                background-repeat: no-repeat;
+                background-position: 14px center;
+            }
+        }
 
         &_active {
             color: #10B981;
             background-color: #FFFFFF14;
         }
+
+        @media (max-width: 1279px) {
+            color: transparent;
+        }
     }
 
     &__title {
         color: #F3F4F6;
+
+        @media (max-width: 1279px) {
+            font-size: 10px;
+        }
     }
 
     &__subtitle {
         color: #9CA3AF;
+
+        @media (max-width: 1279px) {
+            font-size: 8px;
+        }
     }
 
     &__button {
         padding: 8px;
+        padding-right: 30px;
         margin-top: 16px;
         width: 100%;
         border: none;
         border-radius: 8px;
+        background: url('../../src/images/vector.svg') 145px center no-repeat;
         background-color: #10B981;
         font-weight: 600;
         color: #FFFFFF;
         cursor: pointer;
+
+        @media (max-width: 1279px) {
+            padding-right: 8px;
+        }
     }
 }
 
@@ -88,6 +152,7 @@
     &__row {
         &:first-child {
             display: flex;
+            flex-wrap: wrap;
         }
     }
 
@@ -106,19 +171,22 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        padding: 8px 16px;
+        padding: 8px 16px 8px 25px;
         margin-right: 8px;
         font-weight: 600;
         color: #5048E5;
         background-color: inherit;
+        background-repeat: no-repeat;
+        background-position: left center;
+        cursor: pointer;
     }
 
     &__import-btn {
-        background-image: url('../img/import.svg');
+        background-image: url('../../src/images/import.svg');
     }
 
     &__export-btn {
-        background-image: url('../img/export.svg');
+        background-image: url('../../src/images/export.svg');
     }
 
     &__add-btn {
@@ -142,12 +210,15 @@
     background-color: #FFFFFF;
 
     input {
-        min-width: 500px;
+        width: 100%;
+        max-width: 500px;
         height: 56px;
-        padding-left: 36px;
+        padding-left: 45px;
         border: 1px solid #D1D5DB;
         border-radius: 8px;
-        background-image: url('../img/search.svg');
+        background-image: url('../../src/images/search.svg');
+        background-repeat: no-repeat;
+        background-position: 15px center;
         cursor: pointer;
     }
 
@@ -182,16 +253,23 @@
 
         span {
             flex: 1;
+            margin: 0 -16px;
+            padding: 0 16px;
             color: #111827;
             font-size: 12px;
             font-weight: 600;
             text-transform: uppercase;
+
+            &:first-child {
+                padding-right: 58px;
+            }
         }
     }
 
     &__item {
-        padding: 16px;
+        padding: 0 16px;
         display: flex;
+        cursor: pointer;
         
         span {
             flex: 1;
@@ -204,12 +282,65 @@
             color: #111827;
 
             &:first-child {
-                background-image: url('../img/avatar.svg');
+                padding-left: 72px;
+                padding-right: 0;
+                background-image: url('../../src/images/avatar.svg');
+                background-repeat: no-repeat;
+                background-position: 16px center;
             }
         }
     }
 
     &__footer {
+        display: flex;
         padding: 18px 16px;
+    }
+
+    &__footer {
+        margin-left: auto;
+    }
+}
+
+.filter {
+    display: flex;
+    align-items: center;
+    font-size: 12px;
+    color: #111827;
+
+    &__label {
+        margin-right: 8px;
+        color: #6B7280;
+    }
+
+    &__counter {
+        margin-right: 7px;
+    }
+
+    &__select {
+        width: 10px;
+        height: 5px;
+        margin-right: 33px;
+        background: url('../../src/images/arrow-down.svg') center center no-repeat;
+        cursor: pointer;
+    }
+
+    &__info {
+        margin-right: 43px;
+    }
+
+    &__prev-btn, &__next-btn {
+        width: 8px;
+        height: 12px;
+    }
+
+    &__prev-btn {
+        margin-right: 42px;
+        background: url('../../src/images/arrow-left.svg') center no-repeat;
+        cursor: pointer;
+    }
+
+    &__next-btn {
+        background: url('../../src/images/arrow-right.svg') center no-repeat;
+        cursor: pointer;
     }
 }
